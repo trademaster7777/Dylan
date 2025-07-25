@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Wallace - Resume Deck | Limitless Energy Co.</title>
+    <meta name="description" content="Dylan Wallace - Renewable Energy Development & Battery Storage Expert with 25+ years of experience. Co-Founder, COO of Limitless Energy Co & Solar One.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+        }
+        .slide-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .slide-nav button {
+            background: #00E676;
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .slide-nav button:hover {
+            background: #00C853;
+            transform: translateY(-2px);
+        }
+        .slide-nav button:disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .slide-counter {
+            color: #00E676;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #00E676;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-nav">
+        <button onclick="previousSlide()" id="prevBtn">
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+        </span>
+        <button onclick="nextSlide()" id="nextBtn">
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="loading" id="loading">
+        <i class="fas fa-spinner fa-spin mr-3"></i>
+        Loading Dylan's Resume Deck...
+    </div>
+
+    <iframe id="slideFrame" src="slides/title_slide.html" style="display: none;" onload="hideLoading()"></iframe>
+
+    <script>
+        const slides = [
+            'title_slide.html',
+            'executive_summary.html',
+            'track_record.html',
+            'battery_expertise.html',
+            'safety_compliance.html',
+            'licenses_certifications.html',
+            'technical_expertise.html',
+            'engineering_achievements.html',
+            'competitive_edge.html',
+            'contact.html'
+        ];
+
+        let currentSlideIndex = 0;
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('slideFrame').style.display = 'block';
+        }
+
+        function updateSlide() {
+            const iframe = document.getElementById('slideFrame');
+            iframe.src = `slides/${slides[currentSlideIndex]}`;
+            
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === slides.length - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlide();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                event.preventDefault();
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
+
